@@ -4,13 +4,12 @@ import { Avatar, Button, Card, List, Paragraph } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { cardDetailRequest } from "../../../model/cardDetail-model/cardDetail.actions"
 import { useDispatch, useSelector } from 'react-redux';
+import styles from '../../styles/dashboard.style'
 
-const ScreenWidth = Dimensions.get("screen").width
-const ScreenHeight = Dimensions.get("screen").height
 
 function LogoTitle() {
     return (
-        <View style={{ justifyContent: "flex-end", alignContent: "flex-end", paddingTop: 15, paddingRight: 20, flexDirection: "row" }}>
+        <View style={styles.mainImageContainer}>
             <Image
                 source={require('../../../../assets/Logo.png')}
             />
@@ -43,28 +42,24 @@ const CardDetail = () => {
             setData(card)
         }
     }, [cardDetailData.isLoading])
-    console.log(data.cardDetails,"+++++++++++++++++++++++++++++")
     return (
-        <View style={{ flex: 1, backgroundColor: "#0C365A" }}>
+        <View style={styles.container}>
             {data && data.cardDetails && data.cardDetails?.map((items, index) =>
                 <View key={index}>
-                    <View style={{ position: "absolute", top: 0, left: 0, right: 0 }}>
+                    <View style={styles.containerLogoAndTitle}>
                         <LogoTitle />
-                        <Text style={{ fontSize: 23, fontWeight: "bold", left: 10, color: "#fff", padding: 10 }}>
+                        <Text style={styles.debitCardTitle}>
                             Debit Card
                         </Text>
                         <View>
-                            <Text style={{ fontSize: 14, fontWeight: "bold", left: 10, color: "#fff", padding: 10 }}>
+                            <Text style={styles.availableBalance}>
                                 Available balance
                             </Text>
-                            <View style={{ flexDirection: "row", left: 10, alignItems: "center" }} >
-                                <Text style={{
-                                    fontSize: 15, fontWeight: "bold", borderRadius: 5,
-                                    color: "#fff", paddingVertical: 4, paddingHorizontal: 20, backgroundColor: '#01D167'
-                                }}>
+                            <View style={styles.availableBalanceTitle} >
+                                <Text style={styles.availableBalanceTitleText}>
                                     S$
                                 </Text>
-                                <Text style={{ fontSize: 16, fontWeight: "bold", color: "#fff", padding: 10 }}>
+                                <Text style={styles.availableBalanceTitleAmount}>
                                     {items.availableBalance}
                                 </Text>
                             </View>
@@ -74,72 +69,34 @@ const CardDetail = () => {
                         paddingVertical: 50
                     }}>
                         <View >
-                            <View style={{
-                                backgroundColor: "#fff",
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                top: 200,
-                                height: ScreenHeight
-                            }} >
-                                <View style={{
-                                    width: ScreenWidth,
-                                    zIndex: -1,
-                                    top: -100
-                                }}>
-                                    <View style={{
-                                        width: ScreenWidth - 70,
-                                        justifyContent: "center",
-                                        alignContent: "center",
-                                        alignSelf: "center",
-                                    }}>
-                                        <View style={{
-                                            width: ScreenWidth / 2 - 30,
-                                            justifyContent: "flex-end",
-                                            alignContent: "flex-end",
-                                            flexDirection: "row",
-                                            backgroundColor: "#fff",
-                                            alignSelf: "flex-end",
-                                            alignItems: "center",
-                                            padding: 20,
-                                            top: 20,
-                                            right: 2,
-                                            borderTopLeftRadius: 6,
-                                            borderTopRightRadius: 6
-                                        }}>
+                            <View style={styles.cardContainer} >
+                                <View style={styles.cardSecondContainer}>
+                                    <View style={styles.cardThirdContainer}>
+                                        <View style={styles.cardFourthContainer}>
                                             <Image
                                                 style={{ bottom: 10 }}
                                                 source={require('../../../../assets/closeEye.png')}
                                             />
-                                            <Text style={{ fontSize: 14, fontWeight: "bold", color: "#01D167", paddingLeft: 10, bottom: 10 }}>Hide card number</Text>
+                                            <Text style={styles.cardHide}>Hide card number</Text>
                                         </View>
-                                        <Card style={{
-                                            backgroundColor: "#01D167",
-                                            borderRadius: 12
-                                            // borderTopLeftRadius: 30,
-                                            // borderTopRightRadius: 30,
-                                            // borderButtomLeftRadius: 30,
-                                            // borderButtomRightRadius: 30,
-                                        }}>
-                                            <View style={{ justifyContent: "flex-end", alignContent: "flex-end", flexDirection: "row", padding: 20 }}>
+                                        <Card style={styles.card}>
+                                            <View style={styles.cardViewContainer}>
                                                 <Image
                                                     source={require('../../../../assets/AspireLogo.png')}
                                                 />
                                             </View>
                                             <View>
-                                                <Text style={{ fontSize: 16, fontWeight: "bold", left: 10, color: "#fff", padding: 10 }}>
+                                                <Text style={styles.customerName}>
                                                     {items.customername}
                                                 </Text>
-                                                <Text style={{
-                                                    fontSize: 15, fontWeight: "bold", left: 10, color: "#fff",
-                                                    padding: 10, letterSpacing: 2
-                                                }}>
+                                                <Text style={styles.cardNumber}>
                                                     {items.cardNumber}
                                                 </Text>
-                                                <Text style={{ fontSize: 14, fontWeight: "bold", left: 10, color: "#fff", padding: 10 }}>
+                                                <Text style={styles.dateAndCvv}>
                                                     Thru: {items.dateofexy}    CVV: {items.cvv}
                                                 </Text>
                                             </View>
-                                            <View style={{ justifyContent: "flex-end", alignContent: "flex-end", flexDirection: "row", padding: 20 }}>
+                                            <View style={styles.cardViewContainer}>
                                                 <Image
                                                     source={require('../../../../assets/VisaLogo.png')}
                                                 />
@@ -147,41 +104,16 @@ const CardDetail = () => {
                                         </Card>
 
                                     </View>
-                                    <View style={{ padding: 5 }}>
-                                        <View style={{ justifyContent: "space-between", marginVertical: 5, width: "90%", marginHorizontal: "auto", alignContent: "space-around", flexDirection: "row" }}>
-                                            <Text style={{ fontSize: 14, fontWeight: "bold", left: 18, color: "#222222" }}>Debit card spending limit</Text>
-                                            <Text style={{ fontSize: 14, paddingVertical: 2, fontWeight: "bold", left: 10, color: "#01D167" }}>${items.balance} <Text style={{ fontSize: 14, fontWeight: "bold", left: 10, color: "#ddd" }}>$ {items.totalAmount}</Text></Text>
+                                    <View style={styles.containerSecond}>
+                                        <View style={styles.spendingLimitContainer}>
+                                            <Text style={styles.spendingLimitTitle}>Debit card spending limit</Text>
+                                            <Text style={styles.spendingLimitValue}>${items.balance} <Text style={{ fontSize: 14, fontWeight: "bold", left: 10, color: "#ddd" }}>$ {items.totalAmount}</Text></Text>
                                         </View>
-                                        <View style={{
-                                            width: ScreenWidth - 50,
-                                            backgroundColor: "#e5faf0",
-                                            height: 16,
-                                            marginTop: 2,
-                                            justifyContent: "center",
-                                            alignContent: "center",
-                                            alignSelf: "center",
-                                            borderTopLeftRadius: 50,
-                                            borderBottomLeftRadius: 50,
-                                            borderTopRightRadius: 50,
-                                            borderBottomRightRadius: 50,
-                                            paddingBottom: 4,
-
-                                        }}>
-                                            <View style={{
-                                                height: 0,
-                                                backgroundColor: "transparent",
-                                                borderStyle: "solid",
-                                                borderRightWidth: 8,
-                                                borderTopWidth: 16,
-                                                borderTopLeftRadius: 50,
-                                                borderBottomLeftRadius: 50,
-                                                borderRightColor: "transparent",
-                                                borderTopColor: "#01D167",
-                                                width: ScreenWidth / 4
-                                            }} />
+                                        <View style={styles.lineContainer}>
+                                            <View style={styles.lineContainerData} />
                                         </View>
                                     </View>
-                                    <View style={{ width: ScreenWidth - 30, alignSelf: "center", backgroundColor: "transparent", }}>
+                                    <View style={styles.listContainer}>
                                         <List.Item
                                             title="Top-up account"
                                             description="Deposit money to your account to use with card"
